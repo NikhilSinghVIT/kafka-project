@@ -30,7 +30,7 @@ public class LibraryEventProducer {
 
     public void sendLibraryEvent(LibraryEvent libraryEvent) throws JsonProcessingException {
         Integer key = libraryEvent.getLibraryEventId();
-        String value = objectMapper.writeValueAsString(libraryEvent.getBook());
+        String value = objectMapper.writeValueAsString(libraryEvent);
         ListenableFuture<SendResult<Integer,String>> listenableFuture = kafkaTemplate.sendDefault(key,value);
         listenableFuture.addCallback(new ListenableFutureCallback<SendResult<Integer, String>>() {
             @Override
